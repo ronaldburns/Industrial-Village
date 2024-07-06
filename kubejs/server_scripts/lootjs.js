@@ -1,5 +1,5 @@
 LootJS.modifiers(event => {
-    event.enableLogging();
+    //event.enableLogging();
 
     // chests
     event.addLootTypeModifier(LootType.CHEST)
