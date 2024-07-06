@@ -1,5 +1,5 @@
 LootJS.modifiers(event => {
-    //event.enableLogging();
+    event.enableLogging();
 
     // chests
     event.addLootTypeModifier(LootType.CHEST)
@@ -45,9 +45,6 @@ LootJS.modifiers(event => {
 })
 
 LootJS.modifiers((event) => {
-		
-	const lootsize = 9;//amount of unique item stacks that will be allowed to generate from a loot table (item stacks can an item with a count so a stack of 6 bones for instance)
-
 
 
     event.addLootTableModifier("minecraft:chests/nether_bridge")
@@ -67,6 +64,17 @@ LootJS.modifiers((event) => {
 	
 	event.addBlockLootModifier('minecraft:spawner')
     .addLoot('kubejs:monster_coin')
+
+		
+	
+	let originalLootlist = new Array();
+	event.addLootTypeModifier(LootType.CHEST).apply((context)=>{
+
+							originalLootlist = [];
+                context.forEachLoot((loot) =>{
+									originalLootlist.push(loot);
+                })
+        })
 	
 	
     event.addLootTypeModifier(LootType.CHEST)
@@ -245,6 +253,12 @@ LootJS.modifiers((event) => {
     event
         .addLootTypeModifier(LootType.CHEST)
         .apply((context)=>{
+
+					const minModdedLootSize = 2;
+					const maxModdedLootSize = 8;
+		
+					const lootsize = Math.random() * (maxModdedLootSize - minModdedLootSize) + minModdedLootSize;//amount of unique item stacks that will be allowed to generate from a loot table (item stacks can an item with a count so a stack of 6 bones for instance)
+
             if (context.lootSize() > lootsize) {
 
                 lootlist = [];
@@ -253,6 +267,10 @@ LootJS.modifiers((event) => {
                 })
 
                 context.removeLoot(ItemFilter.ALWAYS_TRUE);
+
+								originalLootlist.forEach(item =>{
+										context.addLoot(item);
+								})
                 
                 while (lootlist.length > lootsize){
                     let index = Math.floor(Math.random() * lootlist.length);
