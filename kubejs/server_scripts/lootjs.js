@@ -84,7 +84,7 @@ LootJS.modifiers((event) => {
 	
 	LootEntry.of("ppfluids:fluid_pipe").when((c) => c.randomChance(0.2)).limitCount([1, 3]),
 	LootEntry.of("logicchips:chip").when((c) => c.randomChance(0.3)).limitCount([1, 5]),
-	LootEntry.of("gag:mining_dynamite").when((c) => c.randomChance(0.3)).limitCount([5, 8]),
+	// LootEntry.of("gag:mining_dynamite").when((c) => c.randomChance(0.3)).limitCount([5, 8]),
 	LootEntry.of("immersiveengineering:dust_gold").when((c) => c.randomChance(0.3)).limitCount([1, 3]),
 	LootEntry.of("immersiveengineering:dust_aluminum").when((c) => c.randomChance(0.3)).limitCount([1, 3]),
 	LootEntry.of("immersiveengineering:component_steel").when((c) => c.randomChance(0.1)).limitCount([1, 1]),
